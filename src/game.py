@@ -32,7 +32,7 @@ class Game:
         self.font2 = pygame.font.Font(join('images', 'PixelOperator.ttf'), self.game.infomation.FONT_SIZE - 2)
         self.text_lvl = self.font.render("level " + str(self.game.infomation.CURRENT_LEVEL), False, (255, 255, 255))
         self.text_heath = self.font.render("heath", False, (255, 255, 255))
-        print(self.text_lvl.get_width())
+        # print(self.text_lvl.get_width())
 
 
         #hp bar
@@ -88,6 +88,11 @@ class Game:
             self.display_surf.blit(self.text_lvl, (self.game.infomation.WINDOW_WIDTH - (self.text_lvl.get_width()+(self.text_lvl.get_width()/3)), self.game.infomation.WINDOW_HEIGHT/50))
             self.display_surf.blit(self.text_heath, (self.text_heath.get_width()/3, self.text_heath.get_height()/3))
             self.display_surf.blit(self.bar, (self.text_heath.get_width()/3, self.text_heath.get_height()*1.3))
+            text = self.font.render(str(f"{self.game.infomation.PLAYER_HEALTH:.1f}") + "/" + str(self.game.infomation.PLAYER_MAX_HEALTH), False, (255, 255, 255))
+            self.display_surf.blit(text, (
+                self.text_heath.get_width()/3 + (self.game.infomation.WINDOW_WIDTH//5 - text.get_width())/2,
+                self.text_heath.get_height()*1.3 + (self.game.infomation.WINDOW_HEIGHT//22 - text.get_height())/2
+            ))
             self.terminate_button.draw(self.display_surf, dt)
             self.player_sprite.draw()
             

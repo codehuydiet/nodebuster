@@ -11,7 +11,7 @@ class GameSetting:
         self.display_surf.fill('#00000055')
         self.width = self.game.infomation.WINDOW_WIDTH // 2
         self.height = self.game.infomation.WINDOW_HEIGHT // 10 * 8
-        self.font = pygame.font.Font(join('images', 'PixelOperator.ttf'), self.game.infomation.FONT_SIZE + 3)
+        self.font = pygame.font.Font(join('images', 'PixelOperator.ttf'), self.game.infomation.FONT_SIZE + 5)
         
         
         # Calculate center position
@@ -33,7 +33,7 @@ class GameSetting:
             self.y + self.height -(self.height - (self.height / 10)*9) -8,
             self.width - 16, 
             self.height - (self.height / 10)*9,
-            'ok',
+            'return',
             self.font, 
             (255, 75, 80),
             (255, 255, 255)

@@ -42,6 +42,7 @@ class Main:
 
     def run(self): 
         while self.running:
+            print(self.infomation.TOTAL_BITS)
             dt = self.clock.tick(self.infomation.FPS)/1000
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

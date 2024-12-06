@@ -41,6 +41,7 @@ class Player(pygame.sprite.Sprite):
             if sprite.rect.colliderect(self.rect):
                 # print('overlap')
                 sprite.hp -= self.infomation.infomation.PLAYER_ATK
+                self.infomation.infomation.PLAYER_HEALTH -= sprite.atk
                 sprite.get_hit = True
                 sprite.update_image()
                 sprite.scale_point = sprite.max_scale
@@ -84,7 +85,7 @@ class Player(pygame.sprite.Sprite):
         if self.infomation.infomation.PLAYER_HEALTH <= 0:
             self.infomation.infomation.IS_TERMINATED = True
         game.update_image()
-        print(self.infomation.infomation.PLAYER_HEALTH)
+        # print(self.infomation.infomation.PLAYER_HEALTH)
         if self.bounce:
             self.scale_effect(dt)
         self.collision()
@@ -130,11 +131,13 @@ class Enemy(pygame.sprite.Sprite):
             self.hp_full = 5
             self.hp = 5
             self.exp = 10
+            self.atk = 0.5
         else:
             self.size = 70
             self.hp_full = 12
             self.hp = 12
             self.exp = 10
+            self.atk = 0.9
 
     def init_pos(self):
         if randint(0, 1):
