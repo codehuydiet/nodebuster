@@ -36,6 +36,7 @@ class Player(pygame.sprite.Sprite):
                 sprite.pick = True
 
     def shoot(self, dt):
+        self.infomation.shoot.play()
         self.scale_point = self.max_scale
         for sprite in self.collision_sprites:
             if sprite.rect.colliderect(self.rect):

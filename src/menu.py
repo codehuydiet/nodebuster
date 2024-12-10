@@ -1,12 +1,15 @@
 from settings import *
 from components.button import Button
 from game import *
+import time
+
+finished_typing = False
+start_time = time.time()
 
 class Menu:
     def __init__(self, game):
         self.game = game
         self.font = pygame.font.Font(join('images', 'PixelOperator.ttf'), self.game.infomation.FONT_SIZE)
-        
         # Create buttons
         self.play_button = Button(
             self.game.infomation.WINDOW_WIDTH - ((self.game.infomation.WINDOW_WIDTH/100)*85), 
@@ -62,6 +65,13 @@ class Menu:
             (31, 31, 31),
             (255, 255, 255)
         )
+
+        self.font = pygame.font.Font(join('images', 'PixelOperator.ttf'), 80)
+        self.text = "NODEBUSTER"
+        self.typing_speed = 0.3
+        self.TEXT_COLOR = (255, 255, 255)
+        self.text_surface = self.font.render(self.text, True, self.TEXT_COLOR)
+        
 
     def reset_infomation(self):
         data_to_save = {
@@ -335,24 +345,28 @@ class Menu:
             json.dump(data_to_save, save_file, indent=4)
 
     def handle_event(self, event):
-        if self.play_button.handle_event(event):
+        if self.play_button.handle_event(event, self.game.press):
             self.reset_infomation()
             self.game.reset()
             self.game.set_screen("SKILLS")
-        elif self.settings_button.handle_event(event):
+        elif self.settings_button.handle_event(event, self.game.press):
             self.game.set_screen("SETTINGS")
-        elif self.continue_button.handle_event(event):
+        elif self.continue_button.handle_event(event, self.game.press):
             self.game.set_screen("SKILLS")
-        elif self.quit_button.handle_event(event):
+        elif self.quit_button.handle_event(event, self.game.press):
             self.game.save_infomation()
             self.game.running = False
-        elif self.credit_button.handle_event(event):
+        elif self.credit_button.handle_event(event, self.game.press):
             self.game.set_screen("CREDIT")
 
 
     def update(self, dt):
         self.display_surf = pygame.display.get_surface()
         self.display_surf.fill("#1f1f1f")
+        x, y = (self.game.infomation.WINDOW_WIDTH - self.text_surface.get_width())//2, self.game.infomation.WINDOW_HEIGHT // 4
+        print(x, y)
+        elapsed_time = time.time() - start_time
+        finished_typing = self.game.typewriter_effect(self.text, self.font, self.TEXT_COLOR, x, y, elapsed_time, self.typing_speed)
         self.play_button.draw(self.display_surf, dt)
         self.continue_button.draw(self.display_surf, dt)
         self.settings_button.draw(self.display_surf, dt)

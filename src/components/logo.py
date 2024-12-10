@@ -16,7 +16,7 @@ TEXT_COLOR = (0, 255, 0)
 # Font
 font = pygame.font.Font(None, 80) 
 text = "NODEBUSTER" 
-typing_speed = 0.1 
+typing_speed = 0.05 
 
 def typewriter_effect(text, font, color, x, y, screen, elapsed_time, speed):
     num_chars = min(len(text), int(elapsed_time / speed))

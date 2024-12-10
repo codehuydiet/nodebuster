@@ -65,7 +65,7 @@ class Game:
         pygame.draw.rect(self.hp, 'red', inner_rect)
 
     def handle_event(self, event):
-        if self.terminate_button.handle_event(event) or self.game.infomation.IS_TERMINATED:
+        if self.terminate_button.handle_event(event, self.game.press) or self.game.infomation.IS_TERMINATED:
             self.game.infomation.IS_TERMINATED = False
             self.game.infomation.PLAYER_HEALTH = self.game.infomation.PLAYER_MAX_HEALTH
             self.running = False

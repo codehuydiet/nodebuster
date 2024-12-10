@@ -40,7 +40,7 @@ class GameSetting:
         )
     
     def handle_event(self, event):
-        if self.ok_button.handle_event(event):
+        if self.ok_button.handle_event(event, self.game.press):
             self.game.set_screen("MENU")
         
     def update(self, dt, menu):

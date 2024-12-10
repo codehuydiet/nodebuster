@@ -33,11 +33,11 @@ class Terminate:
         self.text_acpuire = self.font3.render('acquired resources', False, (255, 255, 255))
 
     def handle_event(self, event):
-        if self.home_button.handle_event(event):
+        if self.home_button.handle_event(event, self.game.press):
             self.game.infomation.TOTAL_BITS += self.game.infomation.BITS
             self.game.infomation.BITS = 0
             self.game.set_screen("SKILLS")
-        if self.new_button.handle_event(event):
+        if self.new_button.handle_event(event, self.game.press):
             self.game.infomation.TOTAL_BITS += self.game.infomation.BITS
             self.game.infomation.BITS = 0
             self.game.init_game()

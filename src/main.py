@@ -20,7 +20,7 @@ class Main:
         self.menu = Menu(self)
         self.settings = GameSetting(self)
         self.credit = Credit(self)
-        self.skills = Skills(self)  
+        self.skills = Skills(self)
         self.terminate = Terminate(self)
         self.current_screen = self.menu
         
@@ -32,6 +32,21 @@ class Main:
             "CREDIT": self.credit,
             "TERMINATE" : self.terminate,
         }
+
+        self.bgm = pygame.mixer.Sound(join("audio", "You're just a chill guy listening to chill music.mp3"))
+        self.shoot = pygame.mixer.Sound(join("audio", "laser.wav"))
+        self.press = pygame.mixer.Sound(join("audio", "bouton.mp3"))
+        self.bgm.play(loops=-1)
+
+    def typewriter_effect(self, text, font, color, x, y, elapsed_time, speed):
+        num_chars = min(len(text), int(elapsed_time / speed))
+        displayed_text = text[:num_chars]
+        displayed_text += "|" if int(elapsed_time * 2) % 2 == 0 else " "
+
+        text_surface = font.render(displayed_text, True, color)
+        self.display_surf.blit(text_surface, (x, y))
+        return num_chars == len(text)
+
     def init_game(self):
         self.game = self.game = Game(self.clock.tick(self.infomation.FPS)/1000, self)
         self.states["GAME"] = self.game

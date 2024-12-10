@@ -39,27 +39,27 @@ class Skills:
 
 
     def handle_event(self, event):
-        if self.breach_button.handle_event(event):
+        if self.breach_button.handle_event(event, self.game.press):
             self.game.init_game()
             self.game.infomation.IS_TERMINATED = False
             self.game.set_screen("GAME")
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 self.game.set_screen("MENU")
-        if self.damage_button.handle_event(event):
+        if self.damage_button.handle_event(event, self.game.press):
             if self.game.infomation.damage["curr_lvl"] < self.game.infomation.damage["max_lvl"] and self.game.infomation.TOTAL_BITS >= self.game.infomation.damage["cost"][str(self.game.infomation.damage["curr_lvl"] + 1)]["cost"]:
                 self.game.infomation.damage["curr_lvl"] += 1
                 if not self.game.infomation.damage["curr_lvl"] == self.game.infomation.damage["max_lvl"]:
                     self.game.infomation.TOTAL_BITS -= self.game.infomation.damage["cost"][str(self.game.infomation.damage["curr_lvl"])]["cost"]
                     self.game.infomation.PLAYER_ATK += self.game.infomation.damage["cost"][str(self.game.infomation.damage["curr_lvl"])]["value"]
-        if self.hp_button.handle_event(event):
+        if self.hp_button.handle_event(event, self.game.press):
             if self.game.infomation.hp["curr_lvl"] < self.game.infomation.hp["max_lvl"] and self.game.infomation.TOTAL_BITS >= self.game.infomation.hp["cost"][str(self.game.infomation.hp["curr_lvl"] + 1)]["cost"]:
                 self.game.infomation.hp["curr_lvl"] += 1
                 if not self.game.infomation.hp["curr_lvl"] == self.game.infomation.hp["max_lvl"]:
                     self.game.infomation.TOTAL_BITS -= self.game.infomation.hp["cost"][str(self.game.infomation.hp["curr_lvl"])]["cost"]
                     self.game.infomation.PLAYER_MAX_HEALTH += self.game.infomation.hp["cost"][str(self.game.infomation.hp["curr_lvl"])]["value"]
                     self.game.infomation.PLAYER_HEALTH = self.game.infomation.PLAYER_MAX_HEALTH
-        if self.shield_button.handle_event(event):
+        if self.shield_button.handle_event(event, self.game.press):
             if self.game.infomation.shield["curr_lvl"] < self.game.infomation.shield["max_lvl"] and self.game.infomation.TOTAL_BITS >= self.game.infomation.shield["cost"][str(self.game.infomation.shield["curr_lvl"] + 1)]["cost"]:
                 self.game.infomation.shield["curr_lvl"] += 1
                 if not self.game.infomation.shield["curr_lvl"] == self.game.infomation.shield["max_lvl"]:

@@ -16,6 +16,7 @@ class Button:
         self.hovered = False
         self.clicked = False
         self.click_animation = 0
+        self.hover_sound_played = False
 
     def _brighten_color(self, color, factor=1.2):
         return tuple(min(int(c * factor), 255) for c in color)
@@ -50,18 +51,23 @@ class Button:
         text_surface = self.font.render(self.text, False, self.text_color)
         screen.blit(text_surface, text_rect)
 
-    def handle_event(self, event):
+    def handle_event(self, event, click):
         mouse_pos = pygame.mouse.get_pos()
         
         if self.rect.collidepoint(mouse_pos):
             if not self.hovered:
                 self.hovered = True
+                if not self.hover_sound_played:
+                    click.play()
+                    self.hover_sound_played = True
         else:
             self.hovered = False
+            self.hover_sound_played = False
 
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1 and self.rect.collidepoint(mouse_pos):
             self.clicked = True
-            self.click_animation = 0.3  
+            self.click_animation = 0.3
+            click.play()
             return True
         elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
             self.clicked = False
