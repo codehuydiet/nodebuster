@@ -126,16 +126,23 @@ class Enemy(pygame.sprite.Sprite):
         pass
 
     def init_size(self):
-        if randint(1, 100) < 95:
+        x = randint(1, 100)
+        if x > 1 and x < 40:
+            self.size = 50
+            self.hp_full = 12
+            self.hp = 12
+            self.exp = 5
+            self.atk = 0.5
+        elif x >= 40 and x < 80:
             self.size = 30
             self.hp_full = 5
             self.hp = 5
-            self.exp = 10
+            self.exp = 2
             self.atk = 0.5
         else:
-            self.size = 70
-            self.hp_full = 12
-            self.hp = 12
+            self.size = 90
+            self.hp_full = 21
+            self.hp = 21
             self.exp = 10
             self.atk = 0.9
 
@@ -217,21 +224,27 @@ class exp(pygame.sprite.Sprite):
             self.direction.y = -0.2
         self.start = False
         self.goal = False
-        self.speed = 20
+        self.speed = 50
         self.pick = False
     def collision(self, dt):
+        self.cursor = pygame.mouse.get_pos()
         if self.start:
             self.rect.centerx += self.direction.x*dt*self.speed
             self.rect.centery += self.direction.y*dt*self.speed
             if self.rect.centerx - self.get_pos.x > 100 or self.rect.centerx - self.get_pos.x < -100:
-                self.direction.x = (self.goal_point.x - self.rect.centerx)/abs(self.goal_point.x - self.rect.centerx)
-                self.direction.y = (self.goal_point.y - self.rect.centery)/abs(self.goal_point.x - self.rect.centerx)
+                self.direction.x = (self.cursor[0] - self.rect.centerx)/abs(self.cursor[0] - self.rect.centerx)
+                self.direction.y = (self.cursor[1] - self.rect.centery)/abs(self.cursor[0] - self.rect.centerx)
+                self.direction = self.direction.normalize() if self.direction else self.direction
                 self.start = False
                 self.goal = True
         if self.goal:
+            if abs(self.cursor[0] - self.rect.centerx) > 0:
+                self.direction.x = (self.cursor[0] - self.rect.centerx)/abs(self.cursor[0] - self.rect.centerx)
+                self.direction.y = (self.cursor[1] - self.rect.centery)/abs(self.cursor[0] - self.rect.centerx)
+            self.direction = self.direction.normalize() if self.direction else self.direction
             self.rect.centerx += self.direction.x*dt*self.speed
             self.rect.centery += self.direction.y*dt*self.speed
-            if self.rect.x < self.goal_point.x + 30 and self.rect.x > self.goal_point.x - 30:
+            if (self.rect.x < self.cursor[0] + 5 and self.rect.x > self.cursor[0] - 5) and (self.rect.y < self.cursor[1] + 5 and self.rect.y > self.cursor[1] - 5) :
                 self.goal = False
                 self.pick = False
                 self.kill()

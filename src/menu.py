@@ -13,7 +13,7 @@ class Menu:
             self.game.infomation.WINDOW_HEIGHT - ((self.game.infomation.WINDOW_HEIGHT/100)*40), 
             ((self.game.infomation.WINDOW_WIDTH - ((self.game.infomation.WINDOW_WIDTH/100)*25))/4)-(self.game.infomation.WINDOW_WIDTH - ((self.game.infomation.WINDOW_WIDTH/100)*95)), 
             self.game.infomation.WINDOW_HEIGHT - ((self.game.infomation.WINDOW_HEIGHT/100)*91), 
-            "new game", 
+            "New game", 
             self.font, 
             (89, 164, 255), 
             (255, 255, 255)
@@ -63,18 +63,288 @@ class Menu:
             (255, 255, 255)
         )
 
+    def reset_infomation(self):
+        data_to_save = {
+            "state": {
+                "bits": 0,
+                "atk": 10.0,
+                "max_health": 10.0,
+                "shield": 0.0,
+                "curr_level": 0,
+                "spawn_rate": 50000
+            },
+            "upgrades": {
+                "Armor": 0,
+                "Damage": 0,
+                "Health": 0
+            }
+        }
+        with open('save.json', 'w') as save_file:
+            json.dump(data_to_save, save_file, indent=4)
+        data_to_save =[
+                {
+                    "id": "Damage",
+                    "name": "power",
+                    "curr_lvl": 0,
+                    "max_lvl": 16,
+                    "currency": "bits",
+                    "is_open": 1,
+                    "cost": {
+                        "0": {
+                            "value": 0,
+                            "cost": 0
+                        },
+                        "1": {
+                            "value": 1,
+                            "cost": 1
+                        },
+                        "2": {
+                            "value": 3,
+                            "cost": 3
+                        },
+                        "3": {
+                            "value": 5,
+                            "cost": 8
+                        },
+                        "4": {
+                            "value": 7,
+                            "cost": 15
+                        },
+                        "5": {
+                            "value": 9,
+                            "cost": 26
+                        },
+                        "6": {
+                            "value": 11,
+                            "cost": 42
+                        },
+                        "7": {
+                            "value": 12,
+                            "cost": 57
+                        },
+                        "8": {
+                            "value": 14,
+                            "cost": 75
+                        },
+                        "9": {
+                            "value": 15,
+                            "cost": 93
+                        },
+                        "10": {
+                            "value": 16,
+                            "cost": 131
+                        },
+                        "11": {
+                            "value": 17,
+                            "cost": 172
+                        },
+                        "12": {
+                            "value": 18,
+                            "cost": 184
+                        },
+                        "13": {
+                            "value": 19,
+                            "cost": 256
+                        },
+                        "14": {
+                            "value": 20,
+                            "cost": 347
+                        },
+                        "15": {
+                            "value": 21,
+                            "cost": 498
+                        },
+                        "16": {
+                            "value": "Max Level",
+                            "cost": "Max Level"
+                        },
+                        "17": {
+                            "value": "Max Level",
+                            "cost": "Max Level"
+                        }
+                    }
+                },
+                {
+                    "id": "hp",
+                    "name": "heath",
+                    "curr_lvl": 0,
+                    "max_lvl": 16,
+                    "currency": "bits",
+                    "is_open": 1,
+                    "cost": {
+                        "0": {
+                            "value": 0,
+                            "cost": 0
+                        },
+                        "1": {
+                            "value": 1,
+                            "cost": 1
+                        },
+                        "2": {
+                            "value": 3,
+                            "cost": 3
+                        },
+                        "3": {
+                            "value": 5,
+                            "cost": 8
+                        },
+                        "4": {
+                            "value": 7,
+                            "cost": 15
+                        },
+                        "5": {
+                            "value": 9,
+                            "cost": 26
+                        },
+                        "6": {
+                            "value": 11,
+                            "cost": 42
+                        },
+                        "7": {
+                            "value": 12,
+                            "cost": 57
+                        },
+                        "8": {
+                            "value": 14,
+                            "cost": 75
+                        },
+                        "9": {
+                            "value": 15,
+                            "cost": 93
+                        },
+                        "10": {
+                            "value": 16,
+                            "cost": 131
+                        },
+                        "11": {
+                            "value": 17,
+                            "cost": 172
+                        },
+                        "12": {
+                            "value": 18,
+                            "cost": 184
+                        },
+                        "13": {
+                            "value": 19,
+                            "cost": 256
+                        },
+                        "14": {
+                            "value": 20,
+                            "cost": 347
+                        },
+                        "15": {
+                            "value": 21,
+                            "cost": 498
+                        },
+                        "16": {
+                            "value": "Max Level",
+                            "cost": "Max Level"
+                        },
+                        "17": {
+                            "value": "Max Level",
+                            "cost": "Max Level"
+                        }
+                    }
+                },
+                {
+                    "id": "Shield",
+                    "name": "defend",
+                    "value": 3,
+                    "curr_lvl": 0,
+                    "max_lvl": 16,
+                    "currency": "bits",
+                    "is_open": 0,
+                    "cost": {
+                        "0": {
+                            "value": 0,
+                            "cost": 0
+                        },
+                        "1": {
+                            "value": 1,
+                            "cost": 1
+                        },
+                        "2": {
+                            "value": 3,
+                            "cost": 3
+                        },
+                        "3": {
+                            "value": 5,
+                            "cost": 8
+                        },
+                        "4": {
+                            "value": 7,
+                            "cost": 15
+                        },
+                        "5": {
+                            "value": 9,
+                            "cost": 26
+                        },
+                        "6": {
+                            "value": 11,
+                            "cost": 42
+                        },
+                        "7": {
+                            "value": 12,
+                            "cost": 57
+                        },
+                        "8": {
+                            "value": 14,
+                            "cost": 75
+                        },
+                        "9": {
+                            "value": 15,
+                            "cost": 93
+                        },
+                        "10": {
+                            "value": 16,
+                            "cost": 131
+                        },
+                        "11": {
+                            "value": 17,
+                            "cost": 172
+                        },
+                        "12": {
+                            "value": 18,
+                            "cost": 184
+                        },
+                        "13": {
+                            "value": 19,
+                            "cost": 256
+                        },
+                        "14": {
+                            "value": 20,
+                            "cost": 347
+                        },
+                        "15": {
+                            "value": 21,
+                            "cost": 498
+                        },
+                        "16": {
+                            "value": "Max Level",
+                            "cost": "Max Level"
+                        },
+                        "17": {
+                            "value": "Max Level",
+                            "cost": "Max Level"
+                        }
+                    }
+                }
+            ]
+
+        with open('skills.json', 'w') as save_file:
+            json.dump(data_to_save, save_file, indent=4)
+
     def handle_event(self, event):
         if self.play_button.handle_event(event):
-            # print('vgbneiwughviewrbwb')
-            self.game.init_game()
-            self.game.infomation.IS_TERMINATED = False
-            self.game.set_screen("GAME")
+            self.reset_infomation()
+            self.game.reset()
+            self.game.set_screen("SKILLS")
         elif self.settings_button.handle_event(event):
             self.game.set_screen("SETTINGS")
         elif self.continue_button.handle_event(event):
-            # self.game.set_screen("SETTINGS")
-            pass
+            self.game.set_screen("SKILLS")
         elif self.quit_button.handle_event(event):
+            self.game.save_infomation()
             self.game.running = False
         elif self.credit_button.handle_event(event):
             self.game.set_screen("CREDIT")

@@ -59,6 +59,8 @@ class Game:
 
         inner_size_width = self.game.infomation.WINDOW_WIDTH//5 - 4 * border_width
         inner_size_height = self.game.infomation.WINDOW_HEIGHT//22 - 4 * border_width
+        if self.game.infomation.PLAYER_HEALTH <= 0:
+            self.game.infomation.PLAYER_HEALTH = 0
         inner_rect = pygame.Rect(border_width+2, border_width+2, inner_size_width * ((self.game.infomation.PLAYER_HEALTH/self.game.infomation.PLAYER_MAX_HEALTH)), inner_size_height)
         pygame.draw.rect(self.hp, 'red', inner_rect)
 

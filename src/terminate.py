@@ -32,15 +32,11 @@ class Terminate:
         self.text_terminate = self.font2.render('SESSION TERMINATED', False, (255, 75, 80))
         self.text_acpuire = self.font3.render('acquired resources', False, (255, 255, 255))
 
-        
-        
-
-
     def handle_event(self, event):
         if self.home_button.handle_event(event):
             self.game.infomation.TOTAL_BITS += self.game.infomation.BITS
             self.game.infomation.BITS = 0
-            self.game.set_screen("MENU")
+            self.game.set_screen("SKILLS")
         if self.new_button.handle_event(event):
             self.game.infomation.TOTAL_BITS += self.game.infomation.BITS
             self.game.infomation.BITS = 0
@@ -49,7 +45,6 @@ class Terminate:
             self.game.set_screen("GAME")
         
     def update(self, dt, game):
-        
         self.display_surf = pygame.display.get_surface()
         self.display_surf.fill("#1f1f1f")
         self.display_surf.blit(
@@ -66,6 +61,8 @@ class Terminate:
                 self.game.infomation.WINDOW_HEIGHT//3.4
             )
         )
+
+        
         text = self.font3.render(str(self.game.infomation.BITS), False, (255, 75, 80))
         self.bit = pygame.Surface((text.get_width()+60, text.get_height()+10), pygame.SRCALPHA)
         self.image_bit = pygame.image.load(join('images', 'exp.png')).convert_alpha()

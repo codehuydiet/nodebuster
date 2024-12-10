@@ -21,6 +21,8 @@ class Button:
         return tuple(min(int(c * factor), 255) for c in color)
 
     def draw(self, screen, dt):
+        if not isinstance(self.text, str):
+            self.text = str(self.text)
         scale = 1.0
         if self.click_animation > 0:
             scale = 1 - math.sin(self.click_animation * math.pi) * 0.1

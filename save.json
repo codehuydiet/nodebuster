@@ -1,0 +1,15 @@
+{
+    "state": {
+        "bits": 0,
+        "atk": 10.0,
+        "max_health": 10.0,
+        "shield": 0.0,
+        "curr_level": 0,
+        "spawn_rate": 50000
+    },
+    "upgrades": {
+        "Armor": 0,
+        "Damage": 0,
+        "Health": 0
+    }
+}
